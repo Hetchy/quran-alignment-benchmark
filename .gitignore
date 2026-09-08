@@ -1,0 +1,16 @@
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+corpus/
+.venv/
+node_modules/
+
+# Local planning and browser QA artifacts
+/DESIGN.md
+/PRODUCT.md
+/tools/check_*browser.py
+/tools/check_leaderboard_revision.py
+/tools/seed_leaderboard_examples.py

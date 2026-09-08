@@ -1,0 +1,17 @@
+name: Audio or ground-truth issue
+description: Report a problem with corpus audio or annotations.
+title: "Corpus issue: "
+body:
+  - type: input
+    id: recording
+    attributes:
+      label: Recording ID or link
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: What is wrong?
+      description: Describe the problem; include the affected time or words if helpful.
+    validations:
+      required: true

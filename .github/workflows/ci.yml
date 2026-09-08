@@ -1,0 +1,30 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -e ".[dev]" -r leaderboard/requirements.txt
+      - run: ruff check src tests leaderboard tools/deploy_leaderboard.py
+      - run: pytest -q
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: leaderboard/frontend/package-lock.json
+      - run: npm ci && npm run check && npm run build
+        working-directory: leaderboard/frontend
